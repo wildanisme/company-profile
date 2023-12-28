@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Product\Providers;
+namespace Modules\Project\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -11,12 +11,12 @@ class EventServiceProvider extends ServiceProvider
         /**
          * Backend
          */
-        'Modules\Product\Events\Backend\NewCreated' => [
-            'Modules\Product\Listeners\Backend\NewCreated\UpdateAllOnNewCreated',
+        'Modules\Project\Events\Backend\NewCreated' => [
+            'Modules\Project\Listeners\Backend\NewCreated\UpdateAllOnNewCreated',
         ],
-
-    /**
-     * Frontend
-     */
+        
+        /**
+         * Frontend
+         */
     ];
 }

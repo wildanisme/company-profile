@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Product\Http\Middleware;
+namespace Modules\Project\Http\Middleware;
 
 use Closure;
 
@@ -10,6 +10,7 @@ class GenerateMenus
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -22,19 +23,19 @@ class GenerateMenus
          */
         \Menu::make('admin_sidebar', function ($menu) {
 
-            // Products
-            $menu->add('<i class="nav-icon fa-regular fa-sun"></i> '.__('Products'), [
-                'route' => 'backend.products.index',
+            // Projects
+            $menu->add('<i class="nav-icon fa-regular fa-sun"></i> '.__('Projects'), [
+                'route' => 'backend.projects.index',
                 'class' => 'nav-item',
             ])
-                ->data([
-                    'order' => 77,
-                    'activematches' => ['admin/products*'],
-                    'permission' => ['view_products'],
-                ])
-                ->link->attr([
-                    'class' => 'nav-link',
-                ]);
+            ->data([
+                'order'         => 77,
+                'activematches' => ['admin/projects*'],
+                'permission'    => ['view_projects'],
+            ])
+            ->link->attr([
+                'class' => 'nav-link',
+            ]);
         })->sortBy('order');
 
         return $next($request);

@@ -3,5 +3,6 @@
     "Tag": true,
     "Comment": true,
     "Category": true,
-    "Product": true
+    "Product": true,
+    "Project": true
 }

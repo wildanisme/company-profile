@@ -1,22 +1,22 @@
 <?php
 
-namespace Modules\Product\Providers;
+namespace Modules\Project\Providers;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Symfony\Component\Finder\Finder;
 
-class ProductServiceProvider extends ServiceProvider
+class ProjectServiceProvider extends ServiceProvider
 {
     /**
      * @var string
      */
-    protected $moduleName = 'Product';
+    protected $moduleName = 'Project';
 
     /**
      * @var string
      */
-    protected $moduleNameLower = 'product';
+    protected $moduleNameLower = 'project';
 
     /**
      * Boot the application events.
@@ -28,14 +28,14 @@ class ProductServiceProvider extends ServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
-        $this->loadMigrationsFrom(base_path('Modules/Product/database/migrations'));
+        $this->loadMigrationsFrom(base_path('Modules/Project/database/migrations'));
 
         // adding global middleware
         $kernel = $this->app->make('Illuminate\Contracts\Http\Kernel');
-        $kernel->pushMiddleware('Modules\Product\Http\Middleware\GenerateMenus');
+        $kernel->pushMiddleware('Modules\Project\Http\Middleware\GenerateMenus');
 
         // register commands
-        $this->registerCommands('\Modules\Product\Console\Commands');
+        $this->registerCommands('\Modules\Project\Console\Commands');
     }
 
     /**
@@ -46,7 +46,7 @@ class ProductServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
-
+        
         $this->app->register(EventServiceProvider::class);
     }
 
@@ -58,10 +58,10 @@ class ProductServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->publishes([
-            base_path('Modules/Product/Config/config.php') => config_path($this->moduleNameLower.'.php'),
+            base_path('Modules/Project/Config/config.php') => config_path($this->moduleNameLower.'.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            base_path('Modules/Product/Config/config.php'), $this->moduleNameLower
+            base_path('Modules/Project/Config/config.php'), $this->moduleNameLower
         );
     }
 
@@ -74,7 +74,7 @@ class ProductServiceProvider extends ServiceProvider
     {
         $viewPath = resource_path('views/modules/'.$this->moduleNameLower);
 
-        $sourcePath = base_path('Modules/Product/Resources/views');
+        $sourcePath = base_path('Modules/Project/Resources/views');
 
         $this->publishes([
             $sourcePath => $viewPath,
@@ -90,7 +90,7 @@ class ProductServiceProvider extends ServiceProvider
      */
     public function registerTranslations()
     {
-        $this->loadTranslationsFrom(__DIR__.'/../lang', 'product');
+        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'project');
     }
 
     /**
